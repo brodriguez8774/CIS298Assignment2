@@ -3,4 +3,15 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!--Static Text-->
+    <string name="convert_string">Convert:</string>
+    <string name="from_string">From:</string>
+    <string name="to_string">To:</string>
+    <string name="celsius_string">Celsius</string>
+    <string name="fahrenheit_string">Fahrenheit</string>
+    <string name="kelvin_string">Kelvin</string>
+    <string name="rankin_string">Rankin</string>
+    <string name="convert_button_string">CONVERT</string>
+
 </resources>
