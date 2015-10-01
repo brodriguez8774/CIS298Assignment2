@@ -32,6 +32,11 @@ public class TemperatureConverter extends AppCompatActivity {
     private TextView mConversionTextView;
     private TextView mEquationTextView;
 
+    // Values to check if user input is present.
+    private boolean mInitialGroupChecked;
+    private boolean mConvertGroupChecked;
+    private boolean mInputTextPresent;
+
     private static final String TAG = "TemperatureConverter";
     private static final String KEY_INDEX = "index";
 
@@ -40,6 +45,35 @@ public class TemperatureConverter extends AppCompatActivity {
 
 
     //region Standard Methods
+
+    /**
+     * Gets the values of user's input and converts.
+     * <p>
+     * Only use if both groups have been checked and user has input a number to convert.
+     */
+    private void Convert()
+    {
+        // Query to determine which radio buttons have been selected. Stores value as int.
+        int selectedInitialId = mInitialGroup.getCheckedRadioButtonId();
+        int selectedConvertId = mConvertGroup.getCheckedRadioButtonId();
+
+        Conversion conversion = new Conversion(0, selectedInitialId, selectedConvertId);
+
+        DisplayConversion();
+    }
+
+    private void DisplayConversion()
+    {
+        String conversion1String;
+        String conversion2String;
+        String fullConversionString = conversion1String + " = " + conversion2String;
+        mConversionTextView.setText(fullConversionString);
+
+        String equation1String;
+        String equation2String;
+        String fullEquationString = equation1String + " = " + equation2String;
+        mEquationTextView.setText(fullEquationString);
+    }
 
     //endregion
 
@@ -74,14 +108,47 @@ public class TemperatureConverter extends AppCompatActivity {
         mConversionTextView = (TextView) findViewById(R.id.converstion_text_view);
         mEquationTextView = (TextView) findViewById(R.id.equation_text_view);
 
+        mInitialGroupChecked = false;
+        mConvertGroupChecked = false;
 
-        //Section which sets onClickListeners (watches for user action).
+        // Section which sets onClickListeners (watches for user action).
+        // OnClickListener for Initial Radio Button Group.
+        mInitialGroup.setOnClickListener(new  View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                // Checks to see if both groups have been checked.
+                if (mInitialGroupChecked && mConvertGroupChecked) {
+                    Convert();
+                }
+                else {
+                    mInitialGroupChecked = true;
+                }
+            }
+        });
+
+        // OnClickListener for Convert To Radio Button Group.
+        mConvertGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mInitialGroupChecked && mConvertGroupChecked) {
+                    Convert();
+                }
+                else {
+                    mConvertGroupChecked = true;
+                }
+            }
+        });
+
+        // OnClickListener for Convert Button.
         mConvertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Query to determine which radio buttons have been selected. Stores value as int.
-                int selectedInitialId = mInitialGroup.getCheckedRadioButtonId();
-                int selectedConvertId = mConvertGroup.getCheckedRadioButtonId();
+                if (mInitialGroupChecked && mConvertGroupChecked) {
+                    Convert();
+                }
+                else {
+
+                }
             }
         });
 

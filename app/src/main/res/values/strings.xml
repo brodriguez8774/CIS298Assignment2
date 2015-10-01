@@ -11,7 +11,7 @@
     <string name="celsius_string">Celsius</string>
     <string name="fahrenheit_string">Fahrenheit</string>
     <string name="kelvin_string">Kelvin</string>
-    <string name="rankin_string">Rankin</string>
+    <string name="rankin_string">Rankine</string>
     <string name="convert_button_string">CONVERT</string>
 
 </resources>
