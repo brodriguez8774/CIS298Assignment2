@@ -2,109 +2,145 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="start"
+    android:padding="20dp"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:gravity="top"
+        android:text="@string/convert_string" />
+
+    <EditText
+        android:id="@+id/user_input_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity=""
-            android:orientation="vertical" >
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="horizontal" >
 
-            <TextView
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/from_string"/>
+                android:layout_gravity="start"
+                android:paddingRight="30dp"
+                android:orientation="vertical" >
 
-            <RadioGroup
-                android:id="@+id/initial_value_group"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/from_string"/>
+
+                <RadioGroup
+                    android:id="@+id/initial_value_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RadioButton
+                        android:id="@+id/initial_1_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/celsius_string" />
+
+                    <RadioButton
+                        android:id="@+id/initial_2_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fahrenheit_string" />
+
+                    <RadioButton
+                        android:id="@+id/initial_3_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kelvin_string" />
+
+                    <RadioButton
+                        android:id="@+id/initial_4_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rankine_string" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:paddingLeft="30dp"
+                android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/initial_1_radio"
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="@string/to_string"/>
 
-                <RadioButton
-                    android:id="@+id/initial_2_radio"
+                <RadioGroup
+                    android:id="@+id/convert_to_group"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
 
-                <RadioButton
-                    android:id="@+id/initial_3_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:id="@+id/convert_1_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/celsius_string" />
 
-                <RadioButton
-                    android:id="@+id/initial_4_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:id="@+id/convert_2_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fahrenheit_string" />
 
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/convert_3_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kelvin_string" />
+
+                    <RadioButton
+                        android:id="@+id/convert_4_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rankine_string" />
+                </RadioGroup>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/convert_button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity=""
-            android:orientation="vertical">
+            android:text="@string/convert_button_string"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/to_string"/>
+        <TextView
+            android:id="@+id/converstion_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-            <RadioGroup
-                android:id="@+id/convert_to_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/convert_1_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <RadioButton
-                    android:id="@+id/convert_2_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <RadioButton
-                    android:id="@+id/convert_3_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <RadioButton
-                    android:id="@+id/convert_4_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </RadioGroup>
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/equation_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/convert_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/convert_button_string"/>
 
-    <TextView
-        android:id="@+id/converstion_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/equation_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

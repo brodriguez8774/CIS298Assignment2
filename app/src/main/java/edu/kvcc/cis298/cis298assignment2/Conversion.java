@@ -7,9 +7,9 @@ public class Conversion {
 
     //region Variables
 
-    private int initialValueInt;        // Temperature user wants to convert.
-    private int convertedValueInt;      // Temperature after conversion.
-    private int baseInt;                // Temperature at default value, arbitrarily specified as
+    private double initialValueDouble;        // Temperature user wants to convert.
+    private double convertedValueDouble;      // Temperature after conversion.
+    private double baseDouble;                // Temperature at default value, arbitrarily specified as
                                         // Celsius in this program. Used to help modularize program.
     private int initialGroupInt;        // Holds temperature type of initial value.
     private int convertGroupInt;        // Holds temperature type of converted value.
@@ -20,9 +20,9 @@ public class Conversion {
 
     //region Constructor
 
-    public Conversion(int initialValue, int initialGroup, int convertGroup)
+    public Conversion(double initialValue, int initialGroup, int convertGroup)
     {
-        setInitialValueInt(initialValueInt);
+        setInitialValueDouble(initialValueDouble);
         setInitialGroupInt(initialGroupInt);
         setConvertGroupInt(convertGroupInt);
 
@@ -35,16 +35,16 @@ public class Conversion {
 
     //region Properties
 
-    public int getInitialValueInt() {
-        return initialValueInt;
+    public double getInitialValueDouble() {
+        return initialValueDouble;
     }
 
-    public void setInitialValueInt(int initialValueInt) {
-        this.initialValueInt = initialValueInt;
+    public void setInitialValueDouble(double initialValueDouble) {
+        this.initialValueDouble = initialValueDouble;
     }
 
-    public int getConvertedValueInt() {
-        return convertedValueInt;
+    public double getConvertedValueDouble() {
+        return convertedValueDouble;
     }
 
     public int getInitialGroupInt() {
@@ -75,21 +75,21 @@ public class Conversion {
     private void CalculateBase() {
         // If initial is Celsius, set base equal to user input.
         if (initialGroupInt == 1) {
-            baseInt = initialValueInt;
+            baseDouble = initialValueDouble;
         }
         else {
             // If initial is Fahrenheit, convert to Celsius then set as base.
             if (initialGroupInt == 2) {
-                baseInt = ((initialValueInt - 32) * 5 / 9);
+                baseDouble = ((initialValueDouble - 32) * 5 / 9);
             }
             else {
                 // If initial is Kelvin, convert to Celsius then set as base.
                 if (initialGroupInt == 3) {
-                    baseInt = (initialValueInt - 273);  // Should be 273.15
+                    baseDouble = (initialValueDouble - 273.15);
                 }
                 // If initial is Rankin, convert to Celsius then set as base.
                 else {
-                    baseInt = ((initialValueInt - 491) * 5 / 9);  // Should be 491.67
+                    baseDouble = ((initialValueDouble - 491.67) * 5 / 9);
                 }
             }
         }
@@ -103,21 +103,21 @@ public class Conversion {
     {
         // If desired is Celsius, set convert equal to base.
         if (convertGroupInt == 1) {
-            convertedValueInt = baseInt;
+            convertedValueDouble = baseDouble;
         }
         else {
             // If desired is Fahrenheit, convert from base.
             if (convertGroupInt == 2) {
-                convertedValueInt = (baseInt * 9 / 5 + 32);
+                convertedValueDouble = (baseDouble * 9 / 5 + 32);
             }
             else {
                 // If desired is Kelvin, convert from base.
                 if (convertGroupInt == 3) {
-                    convertedValueInt = (baseInt + 273);     // Should be 273.15
+                    convertedValueDouble = (baseDouble + 273.15);
                 }
                 // If desired is Rankin, convert from base.
                 else {
-                    convertedValueInt = ((baseInt + 273) * 9 / 5);   // Should be 273.15
+                    convertedValueDouble = ((baseDouble + 273.15) * 9 / 5);
                 }
             }
         }

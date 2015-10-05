@@ -7,9 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TemperatureConverter extends AppCompatActivity {
 
@@ -32,11 +34,19 @@ public class TemperatureConverter extends AppCompatActivity {
     private TextView mConversionTextView;
     private TextView mEquationTextView;
 
+    private EditText mUserInputEditText;
+
+    // Pointer for strings.xml.
+    private int messageResId;
+    private int mSelectedInitialId;
+    private int mSelectedConvertId;
+
     // Values to check if user input is present.
     private boolean mInitialGroupChecked;
     private boolean mConvertGroupChecked;
-    private boolean mInputTextPresent;
+    private boolean mConvertButtonIsClicked;
 
+    // Java's version of static constants.
     private static final String TAG = "TemperatureConverter";
     private static final String KEY_INDEX = "index";
 
@@ -54,24 +64,72 @@ public class TemperatureConverter extends AppCompatActivity {
     private void Convert()
     {
         // Query to determine which radio buttons have been selected. Stores value as int.
-        int selectedInitialId = mInitialGroup.getCheckedRadioButtonId();
-        int selectedConvertId = mConvertGroup.getCheckedRadioButtonId();
+        mSelectedInitialId = mInitialGroup.getCheckedRadioButtonId();
+        mSelectedConvertId = mConvertGroup.getCheckedRadioButtonId();
 
-        Conversion conversion = new Conversion(0, selectedInitialId, selectedConvertId);
+        Conversion conversion = new Conversion(0, mSelectedInitialId, mSelectedConvertId);
 
         DisplayConversion();
     }
 
     private void DisplayConversion()
     {
+        String initialDegree;
+        String convertDegree;
+        String initialEquation;
         String conversion1String;
         String conversion2String;
-        String fullConversionString = conversion1String + " = " + conversion2String;
-        mConversionTextView.setText(fullConversionString);
-
         String equation1String;
         String equation2String;
+
+        // Determines what types of strings should display.
+        if (mSelectedInitialId == mInitial1Radio.getId()) {
+            initialDegree = "C";
+            initialEquation = "[C]";
+        }
+        else {
+            if (mSelectedInitialId == mInitial2Radio.getId()) {
+                initialDegree = "F";
+                initialEquation = "[F]";
+            }
+            else {
+                if (mSelectedInitialId == mInitial3Radio.getId()) {
+                    initialDegree = "K";
+                    initialEquation = "[K]";
+                }
+                else {
+                    initialDegree = "R";
+                    initialEquation = "[R]";
+                }
+            }
+        }
+
+        if (mSelectedConvertId == mConvert1Radio.getId()) {
+            convertDegree = "C";
+        }
+        else {
+            if (mSelectedConvertId == mConvert2Radio.getId()) {
+                convertDegree = "F";
+            }
+            else {
+                if (mSelectedConvertId == mConvert3Radio.getId()) {
+                    convertDegree = "K";
+                }
+                else {
+                    convertDegree = "R";
+                }
+            }
+        }
+
+        conversion1String = initialDegree;
+        conversion2String = convertDegree;
+        equation1String = initialEquation;
+        equation2String = "";
+
+        String fullConversionString = conversion1String + " = " + conversion2String;
         String fullEquationString = equation1String + " = " + equation2String;
+
+        mConversionTextView.setText(fullConversionString);
         mEquationTextView.setText(fullEquationString);
     }
 
@@ -92,32 +150,48 @@ public class TemperatureConverter extends AppCompatActivity {
 
         // Assigns (casts) variable mConvertButton to an actual button in the xml file.
         mConvertButton = (Button) findViewById(R.id.convert_button);
-        // Assigns (casts) 'initial' radio group to an equivalent entities in the xml file.
+
+        // Assigns (casts) 'initial' radio group to equivalent entities in the xml file.
         mInitialGroup = (RadioGroup) findViewById(R.id.initial_value_group);
         mInitial1Radio = (RadioButton) findViewById(R.id.initial_1_radio);
         mInitial2Radio = (RadioButton) findViewById(R.id.initial_2_radio);
         mInitial3Radio = (RadioButton) findViewById(R.id.initial_3_radio);
         mInitial4Radio = (RadioButton) findViewById(R.id.initial_4_radio);
-        // Assigns (casts) 'convert to' radio group to an equivalent entities in the xml file.
+        // Assigns (casts) 'convert to' radio group to equivalent entities in the xml file.
         mConvertGroup = (RadioGroup) findViewById(R.id.convert_to_group);
         mConvert1Radio = (RadioButton) findViewById(R.id.convert_1_radio);
         mConvert2Radio = (RadioButton) findViewById(R.id.convert_2_radio);
         mConvert3Radio = (RadioButton) findViewById(R.id.convert_3_radio);
         mConvert4Radio = (RadioButton) findViewById(R.id.convert_4_radio);
-        // Assigns (casts) text views to an equivalent entities in the xml file.
+
+        // Assigns (casts) text views to equivalent entities in the xml file.
         mConversionTextView = (TextView) findViewById(R.id.converstion_text_view);
         mEquationTextView = (TextView) findViewById(R.id.equation_text_view);
 
+        // Assigns (casts) edit text to equivalent entities in the xml file.
+        mUserInputEditText = (EditText) findViewById(R.id.user_input_edit_text);
+
+        // Initial variables to store user inputs.
         mInitialGroupChecked = false;
         mConvertGroupChecked = false;
+        mConvertButtonIsClicked = false;
 
         // Section which sets onClickListeners (watches for user action).
         // OnClickListener for Initial Radio Button Group.
         mInitialGroup.setOnClickListener(new  View.OnClickListener() {
             @Override
             public void onClick(View view){
-                // Checks to see if both groups have been checked.
-                if (mInitialGroupChecked && mConvertGroupChecked) {
+
+                // Debugging to figure out what values are actually given for checked buttons.
+                int selectedInitialId = mInitialGroup.getCheckedRadioButtonId();
+                int selectedConvertId = mConvertGroup.getCheckedRadioButtonId();
+                Log.d(TAG, "Initial Checked ID: " + selectedInitialId);
+                Log.d(TAG, "Convert Checked ID: " + selectedConvertId);
+
+                // Checks to see if both groups have been checked, if convert button has been
+                // clicked at least once, and user has input a number.
+                if (mInitialGroupChecked && mConvertGroupChecked && mUserInputEditText.length() > 0) {
+                    double userInput = Double.parseDouble(mUserInputEditText.toString());
                     Convert();
                 }
                 else {
@@ -130,7 +204,19 @@ public class TemperatureConverter extends AppCompatActivity {
         mConvertGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mInitialGroupChecked && mConvertGroupChecked) {
+
+                // Debugging to figure out what values are actually given for checked buttons.
+                int selectedInitialId = mInitialGroup.getCheckedRadioButtonId();
+                int selectedConvertId = mConvertGroup.getCheckedRadioButtonId();
+                Log.d(TAG, "Initial Checked ID: " + selectedInitialId);
+                Log.d(TAG, "Convert Checked ID: " + selectedConvertId);
+
+
+                // Checks to see if both groups have been checked, if convert button has been
+                // clicked at least once, and user has input a number.
+                if (mInitialGroupChecked && mConvertGroupChecked && mConvertButtonIsClicked
+                        && mUserInputEditText.length() > 0) {
+                    double userInput = Double.parseDouble(mUserInputEditText.toString());
                     Convert();
                 }
                 else {
@@ -143,11 +229,30 @@ public class TemperatureConverter extends AppCompatActivity {
         mConvertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mInitialGroupChecked && mConvertGroupChecked) {
-                    Convert();
+
+                // Debugging to figure out what values are actually given for checked buttons.
+                int selectedInitialId = mInitialGroup.getCheckedRadioButtonId();
+                int selectedConvertId = mConvertGroup.getCheckedRadioButtonId();
+                Log.d(TAG, "Initial Checked ID: " + selectedInitialId);
+                Log.d(TAG, "Convert Checked ID: " + selectedConvertId);
+
+                // Checks to see if user has input a number.
+                if (mUserInputEditText.length() > 0) {
+
+                    // Checks to see if both groups have been checked.
+                    if (mInitialGroupChecked && mConvertGroupChecked) {
+                        double userInput = Double.parseDouble(mUserInputEditText.toString());
+                        mConvertButtonIsClicked = true;
+                        Convert();
+                    }
+                    else {
+                        messageResId = R.string.convert_error_2_toast;
+                        Toast.makeText(TemperatureConverter.this, messageResId, Toast.LENGTH_SHORT);
+                    }
                 }
                 else {
-
+                    messageResId = R.string.convert_error_1_toast;
+                    Toast.makeText(TemperatureConverter.this, messageResId, Toast.LENGTH_SHORT);
                 }
             }
         });

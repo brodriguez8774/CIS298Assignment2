@@ -11,7 +11,11 @@
     <string name="celsius_string">Celsius</string>
     <string name="fahrenheit_string">Fahrenheit</string>
     <string name="kelvin_string">Kelvin</string>
-    <string name="rankin_string">Rankine</string>
+    <string name="rankine_string">Rankine</string>
     <string name="convert_button_string">CONVERT</string>
+
+    <!--Toasts-->
+    <string name="convert_error_1_toast">Please input a number to convert!</string>
+    <string name="convert_error_2_toast">Please select a temperature type!</string>
 
 </resources>
