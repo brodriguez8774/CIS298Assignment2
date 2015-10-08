@@ -1,5 +1,8 @@
 package edu.kvcc.cis298.cis298assignment2;
 
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
 /**
  * Created by brodriguez8774 on 10/1/2015.
  */
@@ -69,6 +72,12 @@ public class Conversion {
 
     //region Private Methods
 
+    private void CalculateTemperature()
+    {
+        CalculateBase();
+        CalculateConvertTo();
+    }
+
     /**
      * Converts user's int to base int.
      */
@@ -117,7 +126,7 @@ public class Conversion {
                 }
                 // If desired is Rankin, convert from base.
                 else {
-                    convertedValueDouble = ((baseDouble + 273.15) * 9 / 5);
+                    convertedValueDouble = ((baseDouble  * 9 / 5) - 491.67);
                 }
             }
         }
@@ -130,11 +139,7 @@ public class Conversion {
 
     //region Public Methods
 
-    public void CalculateTemperature()
-    {
-        CalculateBase();
-        CalculateConvertTo();
-    }
+
 
     //endregion
 

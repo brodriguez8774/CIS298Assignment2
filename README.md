@@ -27,6 +27,9 @@ The book does not cover how to do work with Radio Buttons. I will talk about it 
 
 ## Outside Resources Used
 
+http://javatechig.com/android/android-radio-button-example
+* Determined the equivalent of OnClickListener for radio buttons.
+
 ## Known Problems, Issues, And/Or Errors in the Program
 
 

@@ -12,7 +12,7 @@
     <string name="fahrenheit_string">Fahrenheit</string>
     <string name="kelvin_string">Kelvin</string>
     <string name="rankine_string">Rankine</string>
-    <string name="convert_button_string">CONVERT</string>
+    <string name="convert_button_string">Convert</string>
 
     <!--Toasts-->
     <string name="convert_error_1_toast">Please input a number to convert!</string>

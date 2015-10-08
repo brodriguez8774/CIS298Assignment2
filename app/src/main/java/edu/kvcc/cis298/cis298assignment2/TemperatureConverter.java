@@ -50,6 +50,8 @@ public class TemperatureConverter extends AppCompatActivity {
     private static final String TAG = "TemperatureConverter";
     private static final String KEY_INDEX = "index";
 
+    Conversion conversion;
+
     //endregion
 
 
@@ -63,68 +65,200 @@ public class TemperatureConverter extends AppCompatActivity {
      */
     private void Convert()
     {
+        // Sets user's input to a variable.
+        String userInputString = mUserInputEditText.getText().toString().trim();
+        Log.d(TAG, "Parsed: " + userInputString);
+        double userDouble = Double.parseDouble(userInputString);
+        Log.d(TAG, "Parsed: " + userDouble);
+
         // Query to determine which radio buttons have been selected. Stores value as int.
         mSelectedInitialId = mInitialGroup.getCheckedRadioButtonId();
         mSelectedConvertId = mConvertGroup.getCheckedRadioButtonId();
 
-        Conversion conversion = new Conversion(0, mSelectedInitialId, mSelectedConvertId);
+        int initialGroupSelection;
+        int convertGroupSelection;
+
+        if (mSelectedInitialId == mInitial1Radio.getId()) {
+            initialGroupSelection = 1;
+        }
+        else {
+            if (mSelectedInitialId == mInitial2Radio.getId()) {
+                initialGroupSelection = 2;
+            }
+            else {
+                if (mSelectedInitialId == mInitial3Radio.getId()) {
+                    initialGroupSelection = 3;
+                }
+                else {
+                    if (mSelectedInitialId == mInitial4Radio.getId()) {
+                        initialGroupSelection = 4;
+                    }
+                }
+            }
+        }
+
+        if (mSelectedConvertId == mConvert1Radio.getId()) {
+            convertGroupSelection = 1;
+        }
+        else {
+            if (mSelectedConvertId == mConvert2Radio.getId()) {
+                convertGroupSelection = 2;
+            }
+            else {
+                if (mSelectedConvertId == mConvert3Radio.getId()) {
+                    convertGroupSelection = 3;
+                }
+                else {
+                    if (mSelectedConvertId == mConvert4Radio.getId()) {
+                        convertGroupSelection = 4;
+                    }
+                }
+            }
+        }
+
+        conversion = new Conversion(0, initialGroupSelection, convertGroupSelection);
 
         DisplayConversion();
     }
 
     private void DisplayConversion()
     {
-        String initialDegree;
-        String convertDegree;
-        String initialEquation;
+        double initialTemp = conversion.getInitialValueDouble();
+        double convertTemp = conversion.getConvertedValueDouble();
         String conversion1String;
         String conversion2String;
         String equation1String;
         String equation2String;
 
         // Determines what types of strings should display.
+        // Combinations for Initial1 selected.
         if (mSelectedInitialId == mInitial1Radio.getId()) {
-            initialDegree = "C";
-            initialEquation = "[C]";
+            if (mSelectedConvertId == mConvert1Radio.getId()) {
+                conversion1String = initialTemp + "C";
+                conversion2String = convertTemp + "C";
+                equation1String = "[C]";
+                equation2String = "[C]";
+            }
+            else {
+                if (mSelectedConvertId == mConvert2Radio.getId()) {
+                    conversion1String = initialTemp + "C";
+                    conversion2String = convertTemp + "F";
+                    equation1String = "[F]";
+                    equation2String = "([C] x 9/5) + 32";
+                }
+                else {
+                    if (mSelectedConvertId == mConvert3Radio.getId()) {
+                        conversion1String = initialTemp + "C";
+                        conversion2String = convertTemp + "K";
+                        equation1String = "[K]";
+                        equation2String = "[C] + 273.15";
+                    }
+                    else {
+                        conversion1String = initialTemp + "C";
+                        conversion2String = convertTemp + "R";
+                        equation1String = "[R]";
+                        equation2String = "([C] * 9 / 5) + 491.67";
+                    }
+                }
+            }
         }
         else {
+            // Combinations for Initial2 selected.
             if (mSelectedInitialId == mInitial2Radio.getId()) {
-                initialDegree = "F";
-                initialEquation = "[F]";
+                if (mSelectedConvertId == mConvert1Radio.getId()) {
+                    conversion1String = initialTemp + "F";
+                    conversion2String = convertTemp + "C";
+                    equation1String = "[C]";
+                    equation2String = "([F] - 32) * 5 / 9";
+                }
+                else {
+                    if (mSelectedConvertId == mConvert2Radio.getId()) {
+                        conversion1String = initialTemp + "F";
+                        conversion2String = convertTemp + "F";
+                        equation1String = "[F]";
+                        equation2String = "[F]";
+                    }
+                    else {
+                        if (mSelectedConvertId == mConvert3Radio.getId()) {
+                            conversion1String = initialTemp + "F";
+                            conversion2String = convertTemp + "K";
+                            equation1String = "[K]";
+                            equation2String = "[F]";
+                        }
+                        else {
+                            conversion1String = initialTemp + "F";
+                            conversion2String = convertTemp + "R";
+                            equation1String = "[R]";
+                            equation2String = "[F]";
+                        }
+                    }
+                }
             }
             else {
+                // Combinations for Initial3 selected.
                 if (mSelectedInitialId == mInitial3Radio.getId()) {
-                    initialDegree = "K";
-                    initialEquation = "[K]";
+                    if (mSelectedConvertId == mConvert1Radio.getId()) {
+                        conversion1String = initialTemp + "K";
+                        conversion2String = convertTemp + "C";
+                        equation1String = "[C]";
+                        equation2String = "[K] - 273.15";
+                    }
+                    else {
+                        if (mSelectedConvertId == mConvert2Radio.getId()) {
+                            conversion1String = initialTemp + "K";
+                            conversion2String = convertTemp + "F";
+                            equation1String = "[F]";
+                            equation2String = "[K]";
+                        }
+                        else {
+                            if (mSelectedConvertId == mConvert3Radio.getId()) {
+                                conversion1String = initialTemp + "K";
+                                conversion2String = convertTemp + "K";
+                                equation1String = "[K]";
+                                equation2String = "[K]";
+                            }
+                            else {
+                                conversion1String = initialTemp + "K";
+                                conversion2String = convertTemp + "R";
+                                equation1String = "[R]";
+                                equation2String = "[K]";
+                            }
+                        }
+                    }
                 }
                 else {
-                    initialDegree = "R";
-                    initialEquation = "[R]";
+                    // Combinations for Initial4 selected
+                    if (mSelectedConvertId == mConvert1Radio.getId()) {
+                        conversion1String = initialTemp + "R";
+                        conversion2String = convertTemp + "C";
+                        equation1String = "[C]";
+                        equation2String = "([R] - 491.67) * 5 / 9";
+                    }
+                    else {
+                        if (mSelectedConvertId == mConvert2Radio.getId()) {
+                            conversion1String = initialTemp + "R";
+                            conversion2String = convertTemp + "F";
+                            equation1String = "[F]";
+                            equation2String = "[R]";
+                        }
+                        else {
+                            if (mSelectedConvertId == mConvert3Radio.getId()) {
+                                conversion1String = initialTemp + "R";
+                                conversion2String = convertTemp + "K";
+                                equation1String = "[K]";
+                                equation2String = "[R]";
+                            }
+                            else {
+                                conversion1String = initialTemp + "R";
+                                conversion2String = convertTemp + "R";
+                                equation1String = "[R]";
+                                equation2String = "[R]";
+                            }
+                        }
+                    }
                 }
             }
         }
-
-        if (mSelectedConvertId == mConvert1Radio.getId()) {
-            convertDegree = "C";
-        }
-        else {
-            if (mSelectedConvertId == mConvert2Radio.getId()) {
-                convertDegree = "F";
-            }
-            else {
-                if (mSelectedConvertId == mConvert3Radio.getId()) {
-                    convertDegree = "K";
-                }
-                else {
-                    convertDegree = "R";
-                }
-            }
-        }
-
-        conversion1String = initialDegree;
-        conversion2String = convertDegree;
-        equation1String = initialEquation;
-        equation2String = "";
 
         String fullConversionString = conversion1String + " = " + conversion2String;
         String fullEquationString = equation1String + " = " + equation2String;
@@ -178,9 +312,9 @@ public class TemperatureConverter extends AppCompatActivity {
 
         // Section which sets onClickListeners (watches for user action).
         // OnClickListener for Initial Radio Button Group.
-        mInitialGroup.setOnClickListener(new  View.OnClickListener() {
+        mInitialGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view){
+            public void onCheckedChanged(RadioGroup group, int checkedID) {
 
                 // Debugging to figure out what values are actually given for checked buttons.
                 int selectedInitialId = mInitialGroup.getCheckedRadioButtonId();
@@ -191,19 +325,17 @@ public class TemperatureConverter extends AppCompatActivity {
                 // Checks to see if both groups have been checked, if convert button has been
                 // clicked at least once, and user has input a number.
                 if (mInitialGroupChecked && mConvertGroupChecked && mUserInputEditText.length() > 0) {
-                    double userInput = Double.parseDouble(mUserInputEditText.toString());
                     Convert();
-                }
-                else {
+                } else {
                     mInitialGroupChecked = true;
                 }
             }
         });
 
-        // OnClickListener for Convert To Radio Button Group.
-        mConvertGroup.setOnClickListener(new View.OnClickListener() {
+        // OnCheckChangeListener for Convert To Radio Button Group.
+        mConvertGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
+            public void onCheckedChanged(RadioGroup group, int checkedID) {
 
                 // Debugging to figure out what values are actually given for checked buttons.
                 int selectedInitialId = mInitialGroup.getCheckedRadioButtonId();
@@ -216,10 +348,8 @@ public class TemperatureConverter extends AppCompatActivity {
                 // clicked at least once, and user has input a number.
                 if (mInitialGroupChecked && mConvertGroupChecked && mConvertButtonIsClicked
                         && mUserInputEditText.length() > 0) {
-                    double userInput = Double.parseDouble(mUserInputEditText.toString());
                     Convert();
-                }
-                else {
+                } else {
                     mConvertGroupChecked = true;
                 }
             }
@@ -241,18 +371,15 @@ public class TemperatureConverter extends AppCompatActivity {
 
                     // Checks to see if both groups have been checked.
                     if (mInitialGroupChecked && mConvertGroupChecked) {
-                        double userInput = Double.parseDouble(mUserInputEditText.toString());
                         mConvertButtonIsClicked = true;
                         Convert();
-                    }
-                    else {
+                    } else {
                         messageResId = R.string.convert_error_2_toast;
-                        Toast.makeText(TemperatureConverter.this, messageResId, Toast.LENGTH_SHORT);
+                        Toast.makeText(TemperatureConverter.this, messageResId, Toast.LENGTH_SHORT).show();
                     }
-                }
-                else {
+                } else {
                     messageResId = R.string.convert_error_1_toast;
-                    Toast.makeText(TemperatureConverter.this, messageResId, Toast.LENGTH_SHORT);
+                    Toast.makeText(TemperatureConverter.this, messageResId, Toast.LENGTH_SHORT).show();
                 }
             }
         });
