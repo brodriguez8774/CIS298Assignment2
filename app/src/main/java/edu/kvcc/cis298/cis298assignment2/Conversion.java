@@ -25,9 +25,9 @@ public class Conversion {
 
     public Conversion(double initialValue, int initialGroup, int convertGroup)
     {
-        setInitialValueDouble(initialValueDouble);
-        setInitialGroupInt(initialGroupInt);
-        setConvertGroupInt(convertGroupInt);
+        setInitialValueDouble(initialValue);
+        setInitialGroupInt(initialGroup);
+        setConvertGroupInt(convertGroup);
 
         CalculateTemperature();
     }
@@ -126,7 +126,7 @@ public class Conversion {
                 }
                 // If desired is Rankin, convert from base.
                 else {
-                    convertedValueDouble = ((baseDouble  * 9 / 5) - 491.67);
+                    convertedValueDouble = ((baseDouble + 273.15) * 9 / 5);
                 }
             }
         }

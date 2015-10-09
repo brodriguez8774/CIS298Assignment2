@@ -50,6 +50,8 @@ public class TemperatureConverter extends AppCompatActivity {
     private static final String TAG = "TemperatureConverter";
     private static final String KEY_INDEX = "index";
 
+    private boolean[] mCurrentStatus = new boolean[3];
+
     Conversion conversion;
 
     //endregion
@@ -75,8 +77,8 @@ public class TemperatureConverter extends AppCompatActivity {
         mSelectedInitialId = mInitialGroup.getCheckedRadioButtonId();
         mSelectedConvertId = mConvertGroup.getCheckedRadioButtonId();
 
-        int initialGroupSelection;
-        int convertGroupSelection;
+        int initialGroupSelection = 0;
+        int convertGroupSelection = 0;
 
         if (mSelectedInitialId == mInitial1Radio.getId()) {
             initialGroupSelection = 1;
@@ -116,141 +118,143 @@ public class TemperatureConverter extends AppCompatActivity {
             }
         }
 
-        conversion = new Conversion(0, initialGroupSelection, convertGroupSelection);
+        conversion = new Conversion(userDouble, initialGroupSelection, convertGroupSelection);
 
         DisplayConversion();
     }
 
     private void DisplayConversion()
     {
-        double initialTemp = conversion.getInitialValueDouble();
-        double convertTemp = conversion.getConvertedValueDouble();
+        String initialTemp = String.format("%.2f", conversion.getInitialValueDouble());
+        String convertTemp = String.format("%.2f", conversion.getConvertedValueDouble());
+
+
         String conversion1String;
         String conversion2String;
         String equation1String;
         String equation2String;
 
         // Determines what types of strings should display.
-        // Combinations for Initial1 selected.
+        // Combinations for FromCelsius selected.
         if (mSelectedInitialId == mInitial1Radio.getId()) {
             if (mSelectedConvertId == mConvert1Radio.getId()) {
-                conversion1String = initialTemp + "C";
-                conversion2String = convertTemp + "C";
+                conversion1String = initialTemp + " C";
+                conversion2String = convertTemp + " C";
                 equation1String = "[C]";
                 equation2String = "[C]";
             }
             else {
                 if (mSelectedConvertId == mConvert2Radio.getId()) {
-                    conversion1String = initialTemp + "C";
-                    conversion2String = convertTemp + "F";
+                    conversion1String = initialTemp + " C";
+                    conversion2String = convertTemp + " F";
                     equation1String = "[F]";
                     equation2String = "([C] x 9/5) + 32";
                 }
                 else {
                     if (mSelectedConvertId == mConvert3Radio.getId()) {
-                        conversion1String = initialTemp + "C";
-                        conversion2String = convertTemp + "K";
+                        conversion1String = initialTemp + " C";
+                        conversion2String = convertTemp + " K";
                         equation1String = "[K]";
                         equation2String = "[C] + 273.15";
                     }
                     else {
-                        conversion1String = initialTemp + "C";
-                        conversion2String = convertTemp + "R";
+                        conversion1String = initialTemp + " C";
+                        conversion2String = convertTemp + " R";
                         equation1String = "[R]";
-                        equation2String = "([C] * 9 / 5) + 491.67";
+                        equation2String = "([C] + 273.15) * 9 / 5";
                     }
                 }
             }
         }
         else {
-            // Combinations for Initial2 selected.
+            // Combinations for FromFahrenheit selected.
             if (mSelectedInitialId == mInitial2Radio.getId()) {
                 if (mSelectedConvertId == mConvert1Radio.getId()) {
-                    conversion1String = initialTemp + "F";
-                    conversion2String = convertTemp + "C";
+                    conversion1String = initialTemp + " F";
+                    conversion2String = convertTemp + " C";
                     equation1String = "[C]";
                     equation2String = "([F] - 32) * 5 / 9";
                 }
                 else {
                     if (mSelectedConvertId == mConvert2Radio.getId()) {
-                        conversion1String = initialTemp + "F";
-                        conversion2String = convertTemp + "F";
+                        conversion1String = initialTemp + " F";
+                        conversion2String = convertTemp + " F";
                         equation1String = "[F]";
                         equation2String = "[F]";
                     }
                     else {
                         if (mSelectedConvertId == mConvert3Radio.getId()) {
-                            conversion1String = initialTemp + "F";
-                            conversion2String = convertTemp + "K";
+                            conversion1String = initialTemp + " F";
+                            conversion2String = convertTemp + " K";
                             equation1String = "[K]";
-                            equation2String = "[F]";
+                            equation2String = "([F] + 459.67) * 5 / 9";
                         }
                         else {
-                            conversion1String = initialTemp + "F";
-                            conversion2String = convertTemp + "R";
+                            conversion1String = initialTemp + " F";
+                            conversion2String = convertTemp + " R";
                             equation1String = "[R]";
-                            equation2String = "[F]";
+                            equation2String = "[F] + 459.67";
                         }
                     }
                 }
             }
             else {
-                // Combinations for Initial3 selected.
+                // Combinations for FromKelvin selected.
                 if (mSelectedInitialId == mInitial3Radio.getId()) {
                     if (mSelectedConvertId == mConvert1Radio.getId()) {
-                        conversion1String = initialTemp + "K";
-                        conversion2String = convertTemp + "C";
+                        conversion1String = initialTemp + " K";
+                        conversion2String = convertTemp + " C";
                         equation1String = "[C]";
                         equation2String = "[K] - 273.15";
                     }
                     else {
                         if (mSelectedConvertId == mConvert2Radio.getId()) {
-                            conversion1String = initialTemp + "K";
-                            conversion2String = convertTemp + "F";
+                            conversion1String = initialTemp + " K";
+                            conversion2String = convertTemp + " F";
                             equation1String = "[F]";
-                            equation2String = "[K]";
+                            equation2String = "([K] * 9 / 5) - 459.67";
                         }
                         else {
                             if (mSelectedConvertId == mConvert3Radio.getId()) {
-                                conversion1String = initialTemp + "K";
-                                conversion2String = convertTemp + "K";
+                                conversion1String = initialTemp + " K";
+                                conversion2String = convertTemp + " K";
                                 equation1String = "[K]";
                                 equation2String = "[K]";
                             }
                             else {
-                                conversion1String = initialTemp + "K";
-                                conversion2String = convertTemp + "R";
+                                conversion1String = initialTemp + " K";
+                                conversion2String = convertTemp + " R";
                                 equation1String = "[R]";
-                                equation2String = "[K]";
+                                equation2String = "[K] * 9 / 5";
                             }
                         }
                     }
                 }
                 else {
-                    // Combinations for Initial4 selected
+                    // Combinations for FromRankine selected
                     if (mSelectedConvertId == mConvert1Radio.getId()) {
-                        conversion1String = initialTemp + "R";
-                        conversion2String = convertTemp + "C";
+                        conversion1String = initialTemp + " R";
+                        conversion2String = convertTemp + " C";
                         equation1String = "[C]";
                         equation2String = "([R] - 491.67) * 5 / 9";
                     }
                     else {
                         if (mSelectedConvertId == mConvert2Radio.getId()) {
-                            conversion1String = initialTemp + "R";
-                            conversion2String = convertTemp + "F";
+                            conversion1String = initialTemp + " R";
+                            conversion2String = convertTemp + " F";
                             equation1String = "[F]";
-                            equation2String = "[R]";
+                            equation2String = "[R] - 459.67";
                         }
                         else {
                             if (mSelectedConvertId == mConvert3Radio.getId()) {
-                                conversion1String = initialTemp + "R";
-                                conversion2String = convertTemp + "K";
+                                conversion1String = initialTemp + " R";
+                                conversion2String = convertTemp + " K";
                                 equation1String = "[K]";
-                                equation2String = "[R]";
+                                equation2String = "[R] * 5 / 9";
                             }
                             else {
-                                conversion1String = initialTemp + "R";
-                                conversion2String = convertTemp + "R";
+                                conversion1String = initialTemp + " R";
+                                conversion2String = convertTemp + " R";
                                 equation1String = "[R]";
                                 equation2String = "[R]";
                             }
@@ -279,7 +283,6 @@ public class TemperatureConverter extends AppCompatActivity {
         Log.d(TAG, "onCreate() called");
         setContentView(R.layout.activity_temperature_converter);
 
-
         // Section which assigns (casts) variables to equivalent entity in xml file.
 
         // Assigns (casts) variable mConvertButton to an actual button in the xml file.
@@ -305,10 +308,32 @@ public class TemperatureConverter extends AppCompatActivity {
         // Assigns (casts) edit text to equivalent entities in the xml file.
         mUserInputEditText = (EditText) findViewById(R.id.user_input_edit_text);
 
-        // Initial variables to store user inputs.
-        mInitialGroupChecked = false;
-        mConvertGroupChecked = false;
-        mConvertButtonIsClicked = false;
+        // Gets saved state for booleans.
+        if (savedInstanceState != null) {
+
+            // Loads saved value of initial variables.
+            // ...If KEY_INDEX is an index comprised of a string that points to the array, how the
+            // heck do use it to point to an index in the array? I'm calling an index within an
+            // index? wat.
+            mConvertButtonIsClicked = savedInstanceState.getBoolean(KEY_INDEX, false);
+            mInitialGroupChecked = savedInstanceState.getBoolean(KEY_INDEX, false);
+            mConvertGroupChecked =savedInstanceState.getBoolean(KEY_INDEX, false);
+
+            // Checks to see if user has input a number.
+            if (mUserInputEditText.length() > 0) {
+                // Checks to see if both groups have been checked, and if convert button has been
+                // clicked at least once.
+                if (mInitialGroupChecked && mConvertGroupChecked && mConvertButtonIsClicked) {
+                    Convert();
+                }
+            }
+        }
+        else {
+            // Initial variables to store user inputs.
+            mConvertButtonIsClicked = false;
+            mInitialGroupChecked = false;
+            mConvertGroupChecked = false;
+        }
 
         // Section which sets onClickListeners (watches for user action).
         // OnClickListener for Initial Radio Button Group.
@@ -384,6 +409,19 @@ public class TemperatureConverter extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d(TAG, "onSaveInstanceState");
+
+        // Saves current state booleans.
+        mCurrentStatus[0] = mConvertButtonIsClicked;
+        mCurrentStatus[1] = mInitialGroupChecked;
+        mCurrentStatus[2] = mConvertGroupChecked;
+
+        outState.putBooleanArray(KEY_INDEX, mCurrentStatus);
     }
 
     @Override
