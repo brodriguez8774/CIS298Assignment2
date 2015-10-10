@@ -30,6 +30,14 @@ The book does not cover how to do work with Radio Buttons. I will talk about it 
 
 ## Outside Resources Used
 
+http://stackoverflow.com/questions/2344524/java-equivalent-to-region-in-c-sharp
+* Learned how to use C#'s "#region" equivalent in java.
+
+http://stackoverflow.com/questions/6608673/i-want-to-create-documentation-in-c-something-similar-to-javadoc
+http://www.oracle.com/technetwork/articles/java/index-137868.html
+* Learned about the Java equivalent of /// from C#.
+* Is called "JavaDoc."
+
 http://javatechig.com/android/android-radio-button-example
 * Determined the equivalent of OnClickListener for radio buttons.
 
