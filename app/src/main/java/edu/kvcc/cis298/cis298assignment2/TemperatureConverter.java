@@ -123,6 +123,9 @@ public class TemperatureConverter extends AppCompatActivity {
         DisplayConversion();
     }
 
+    /**
+     * Creates strings for UI display and sends them over to appropriate xml properties.
+     */
     private void DisplayConversion()
     {
         String initialTemp = String.format("%.2f", conversion.getInitialValueDouble());
@@ -138,30 +141,30 @@ public class TemperatureConverter extends AppCompatActivity {
         // Combinations for FromCelsius selected.
         if (mSelectedInitialId == mInitial1Radio.getId()) {
             if (mSelectedConvertId == mConvert1Radio.getId()) {
-                conversion1String = initialTemp + " C";
-                conversion2String = convertTemp + " C";
-                equation1String = "[C]";
-                equation2String = "[C]";
+                conversion1String = initialTemp + " °C";
+                conversion2String = convertTemp + " °C";
+                equation1String = "[°C]";
+                equation2String = "[°C]";
             }
             else {
                 if (mSelectedConvertId == mConvert2Radio.getId()) {
-                    conversion1String = initialTemp + " C";
-                    conversion2String = convertTemp + " F";
-                    equation1String = "[F]";
-                    equation2String = "([C] x 9/5) + 32";
+                    conversion1String = initialTemp + " °C";
+                    conversion2String = convertTemp + " °F";
+                    equation1String = "[°F]";
+                    equation2String = "([°C] x 9/5) + 32";
                 }
                 else {
                     if (mSelectedConvertId == mConvert3Radio.getId()) {
-                        conversion1String = initialTemp + " C";
-                        conversion2String = convertTemp + " K";
-                        equation1String = "[K]";
-                        equation2String = "[C] + 273.15";
+                        conversion1String = initialTemp + " °C";
+                        conversion2String = convertTemp + " °K";
+                        equation1String = "[°K]";
+                        equation2String = "[°C] + 273.15";
                     }
                     else {
-                        conversion1String = initialTemp + " C";
-                        conversion2String = convertTemp + " R";
-                        equation1String = "[R]";
-                        equation2String = "([C] + 273.15) * 9 / 5";
+                        conversion1String = initialTemp + " °C";
+                        conversion2String = convertTemp + " °R";
+                        equation1String = "[°R]";
+                        equation2String = "([°C] + 273.15) * 9 / 5";
                     }
                 }
             }
@@ -170,30 +173,30 @@ public class TemperatureConverter extends AppCompatActivity {
             // Combinations for FromFahrenheit selected.
             if (mSelectedInitialId == mInitial2Radio.getId()) {
                 if (mSelectedConvertId == mConvert1Radio.getId()) {
-                    conversion1String = initialTemp + " F";
-                    conversion2String = convertTemp + " C";
-                    equation1String = "[C]";
-                    equation2String = "([F] - 32) * 5 / 9";
+                    conversion1String = initialTemp + " °F";
+                    conversion2String = convertTemp + " °C";
+                    equation1String = "[°C]";
+                    equation2String = "([°F] - 32) * 5 / 9";
                 }
                 else {
                     if (mSelectedConvertId == mConvert2Radio.getId()) {
-                        conversion1String = initialTemp + " F";
-                        conversion2String = convertTemp + " F";
-                        equation1String = "[F]";
-                        equation2String = "[F]";
+                        conversion1String = initialTemp + " °F";
+                        conversion2String = convertTemp + " °F";
+                        equation1String = "[°F]";
+                        equation2String = "[°F]";
                     }
                     else {
                         if (mSelectedConvertId == mConvert3Radio.getId()) {
-                            conversion1String = initialTemp + " F";
-                            conversion2String = convertTemp + " K";
-                            equation1String = "[K]";
-                            equation2String = "([F] + 459.67) * 5 / 9";
+                            conversion1String = initialTemp + " °F";
+                            conversion2String = convertTemp + " °K";
+                            equation1String = "[°K]";
+                            equation2String = "([°F] + 459.67) * 5 / 9";
                         }
                         else {
-                            conversion1String = initialTemp + " F";
-                            conversion2String = convertTemp + " R";
-                            equation1String = "[R]";
-                            equation2String = "[F] + 459.67";
+                            conversion1String = initialTemp + " °F";
+                            conversion2String = convertTemp + " °R";
+                            equation1String = "[°R]";
+                            equation2String = "[°F] + 459.67";
                         }
                     }
                 }
@@ -202,30 +205,30 @@ public class TemperatureConverter extends AppCompatActivity {
                 // Combinations for FromKelvin selected.
                 if (mSelectedInitialId == mInitial3Radio.getId()) {
                     if (mSelectedConvertId == mConvert1Radio.getId()) {
-                        conversion1String = initialTemp + " K";
-                        conversion2String = convertTemp + " C";
-                        equation1String = "[C]";
-                        equation2String = "[K] - 273.15";
+                        conversion1String = initialTemp + " °K";
+                        conversion2String = convertTemp + " °C";
+                        equation1String = "[°C]";
+                        equation2String = "[°K] - 273.15";
                     }
                     else {
                         if (mSelectedConvertId == mConvert2Radio.getId()) {
-                            conversion1String = initialTemp + " K";
-                            conversion2String = convertTemp + " F";
-                            equation1String = "[F]";
-                            equation2String = "([K] * 9 / 5) - 459.67";
+                            conversion1String = initialTemp + " °K";
+                            conversion2String = convertTemp + " °F";
+                            equation1String = "[°F]";
+                            equation2String = "([°K] * 9 / 5) - 459.67";
                         }
                         else {
                             if (mSelectedConvertId == mConvert3Radio.getId()) {
-                                conversion1String = initialTemp + " K";
-                                conversion2String = convertTemp + " K";
-                                equation1String = "[K]";
-                                equation2String = "[K]";
+                                conversion1String = initialTemp + " °K";
+                                conversion2String = convertTemp + " °K";
+                                equation1String = "[°K]";
+                                equation2String = "[°K]";
                             }
                             else {
-                                conversion1String = initialTemp + " K";
-                                conversion2String = convertTemp + " R";
-                                equation1String = "[R]";
-                                equation2String = "[K] * 9 / 5";
+                                conversion1String = initialTemp + " °K";
+                                conversion2String = convertTemp + " °R";
+                                equation1String = "[°R]";
+                                equation2String = "[°K] * 9 / 5";
                             }
                         }
                     }
@@ -233,30 +236,30 @@ public class TemperatureConverter extends AppCompatActivity {
                 else {
                     // Combinations for FromRankine selected
                     if (mSelectedConvertId == mConvert1Radio.getId()) {
-                        conversion1String = initialTemp + " R";
-                        conversion2String = convertTemp + " C";
-                        equation1String = "[C]";
-                        equation2String = "([R] - 491.67) * 5 / 9";
+                        conversion1String = initialTemp + " °R";
+                        conversion2String = convertTemp + " °C";
+                        equation1String = "[°C]";
+                        equation2String = "([°R] - 491.67) * 5 / 9";
                     }
                     else {
                         if (mSelectedConvertId == mConvert2Radio.getId()) {
-                            conversion1String = initialTemp + " R";
-                            conversion2String = convertTemp + " F";
-                            equation1String = "[F]";
-                            equation2String = "[R] - 459.67";
+                            conversion1String = initialTemp + " °R";
+                            conversion2String = convertTemp + " °F";
+                            equation1String = "[°F]";
+                            equation2String = "[°R] - 459.67";
                         }
                         else {
                             if (mSelectedConvertId == mConvert3Radio.getId()) {
-                                conversion1String = initialTemp + " R";
-                                conversion2String = convertTemp + " K";
-                                equation1String = "[K]";
-                                equation2String = "[R] * 5 / 9";
+                                conversion1String = initialTemp + " °R";
+                                conversion2String = convertTemp + " °K";
+                                equation1String = "[°K]";
+                                equation2String = "[°R] * 5 / 9";
                             }
                             else {
-                                conversion1String = initialTemp + " R";
-                                conversion2String = convertTemp + " R";
-                                equation1String = "[R]";
-                                equation2String = "[R]";
+                                conversion1String = initialTemp + " °R";
+                                conversion2String = convertTemp + " °R";
+                                equation1String = "[°R]";
+                                equation2String = "[°R]";
                             }
                         }
                     }
@@ -264,6 +267,7 @@ public class TemperatureConverter extends AppCompatActivity {
             }
         }
 
+        // Combines above strings into one string, then sends to appropriate single string to textview.
         String fullConversionString = conversion1String + " = " + conversion2String;
         String fullEquationString = equation1String + " = " + equation2String;
 
@@ -276,6 +280,7 @@ public class TemperatureConverter extends AppCompatActivity {
 
 
     //region Override Methods
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -411,12 +416,14 @@ public class TemperatureConverter extends AppCompatActivity {
 
     }
 
+    // Attempted saveInstanceState. Saving part works but can't figure out loading section.
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState");
 
-        // Saves current state booleans.
+        // Saves current state booleans since all user input stays on rotation.
+        // Keeping the booleans SHOULD make the conversions keep showing even on rotation.
         mCurrentStatus[0] = mConvertButtonIsClicked;
         mCurrentStatus[1] = mInitialGroupChecked;
         mCurrentStatus[2] = mConvertGroupChecked;

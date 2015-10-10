@@ -72,6 +72,14 @@ public class Conversion {
 
     //region Private Methods
 
+    /**
+     * Converts user's input to a "base" which in this case is Celsius.
+     * Then converts the base to whatever the desired end-result is.
+     * <p>
+     * Doing it this way helps ensure that all conversions are correct.
+     * IE: if single equation involving celsius is correct, then all celsius equations should be correct.
+     * Same goes for the other three conversion types.
+     */
     private void CalculateTemperature()
     {
         CalculateBase();
