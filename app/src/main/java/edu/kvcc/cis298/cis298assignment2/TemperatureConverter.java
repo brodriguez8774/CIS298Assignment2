@@ -317,12 +317,11 @@ public class TemperatureConverter extends AppCompatActivity {
         if (savedInstanceState != null) {
 
             // Loads saved value of initial variables.
-            // ...If KEY_INDEX is an index comprised of a string that points to the array, how the
-            // heck do use it to point to an index in the array? I'm calling an index within an
-            // index? wat.
-            mConvertButtonIsClicked = savedInstanceState.getBoolean(KEY_INDEX, false);
-            mInitialGroupChecked = savedInstanceState.getBoolean(KEY_INDEX, false);
-            mConvertGroupChecked =savedInstanceState.getBoolean(KEY_INDEX, false);
+            boolean[] savedStateBool = savedInstanceState.getBooleanArray(KEY_INDEX);
+
+            mConvertButtonIsClicked = savedStateBool[0];
+            mInitialGroupChecked = savedStateBool[1];
+            mConvertGroupChecked = savedStateBool[2];
 
             // Checks to see if user has input a number.
             if (mUserInputEditText.length() > 0) {
@@ -423,7 +422,8 @@ public class TemperatureConverter extends AppCompatActivity {
         Log.d(TAG, "onSaveInstanceState");
 
         // Saves current state booleans since all user input stays on rotation.
-        // Keeping the booleans SHOULD make the conversions keep showing even on rotation.
+        // Keeping the booleans will ensure the conversions show even on rotation.
+        // Uses an array over multiple puts, since the booleans are all similarly related.
         mCurrentStatus[0] = mConvertButtonIsClicked;
         mCurrentStatus[1] = mInitialGroupChecked;
         mCurrentStatus[2] = mConvertGroupChecked;
