@@ -6,6 +6,16 @@ Brandon Rodriguez
 
 ## Description
 
+A simple temperature conversion phone app.
+
+User can input a temperature, including decimals and negatives. This input is then converted to/from any of the following: Celsius, Fahrenheit, Kelvin, or Rankine.
+
+For each conversion, the user will see both the input temperature and the converted temperature, as well as the standard equation generally used for such a conversion.
+
+Data is saved on screen rotate and persistant until end of application.
+
+## Project Requirements
+
 Create a temperature converter application.
 The application should look like the screen shots I have provided.
 The application should do the calculation and display the formula that was used to do the calculation.
@@ -53,4 +63,4 @@ http://stackoverflow.com/questions/4885254/string-format-to-format-double-in-jav
 
 ## Known Problems, Issues, And/Or Errors in the Program
 
-
+None noted thus far.
